@@ -27,11 +27,11 @@ const ONE_SQUARED: u256 = 100000000000000000000000000000000000000000000000000000
 
 const BP: u256 = 1000000000000000000000000;
 
-const MAX: u256 = 3618502788666131213697322783095070105526743751716087489154079457884512865583;
+const MAX_UD47x28: u256 = 3618502788666131213697322783095070105526743751716087489154079457884512865583;
 
-const MAX_UNSCALED: u256 = 361850278866613121369732278309507010552674375171;
+const MAX_UNSCALED_UD47x28: u256 = 361850278866613121369732278309507010552674375171;
 
-const MAX_WHOLE: u256 = 3618502788666131213697322783095070105526743751710000000000000000000000000000;
+const MAX_WHOLE_UD47x28: u256 = 3618502788666131213697322783095070105526743751710000000000000000000000000000;
 
 const MAX_EXP2_INPUT: u256 = 1559999999999999999999999999999;
 
@@ -79,7 +79,7 @@ impl UD47x28Impl of UD47x28Trait {
     // Creates new from u256.
     #[inline(always)]
     fn new_unscaled(val: u256) -> UD47x28 {
-        assert(val.into() <= MAX_UNSCALED, 'Unscaled overflow');
+        assert(val.into() <= MAX_UNSCALED_UD47x28, 'Unscaled overflow');
         UD47x28 { val: _to_felt(val * ONE) }
     }
 
@@ -150,7 +150,7 @@ impl UD47x28Impl of UD47x28Trait {
         let x: u256 = self.val.into();
 
         // Result must be less than MAX_UD47x28 / ONE.
-        assert(x <= MAX / ONE, 'UD47x28 sqrt overflow');
+        assert(x <= MAX_UD47x28 / ONE, 'UD47x28 sqrt overflow');
 
         // Calculate the square root of x using the Babylonian method.
         UD47x28Trait::new(fixed_point_math::sqrt(x * ONE))
@@ -158,7 +158,7 @@ impl UD47x28Impl of UD47x28Trait {
 
     fn round(self: UD47x28) -> UD47x28 {
         let x: u256 = self.val.into();
-        assert(x < MAX_WHOLE, 'UD47x28 round overflow');
+        assert(x < MAX_WHOLE_UD47x28, 'UD47x28 round overflow');
 
         let remainder: u256 = x % ONE;
 
@@ -172,7 +172,7 @@ impl UD47x28Impl of UD47x28Trait {
     // Yields the smallest whole number greater than or equal to x.
     fn ceil(self: UD47x28) -> UD47x28 {
         let x: u256 = self.val.into();
-        assert(x <= MAX_WHOLE, 'UD47x28 ceil overflow');
+        assert(x <= MAX_WHOLE_UD47x28, 'UD47x28 ceil overflow');
 
         let remainder: u256 = x % ONE;
 

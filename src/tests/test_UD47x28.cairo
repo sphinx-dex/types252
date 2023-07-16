@@ -3,7 +3,7 @@ use array::ArrayTrait;
 use option::OptionTrait;
 
 use types252::types::UD47x28::{UD47x28, UD47x28Trait, UD47x28Zeroable};
-use types252::types::UD47x28::{ONE, E, PI, MAX_WHOLE, MAX};
+use types252::types::UD47x28::{ONE, E, PI, MAX_WHOLE_UD47x28, MAX_UD47x28};
 
 use debug::PrintTrait;
 
@@ -158,11 +158,11 @@ fn test_log2_not_power_of_two_sets() {
     x = UD47x28Trait::new(10000000000000000000000000000000000);
     assert(x.log2() == UD47x28Trait::new(199315685693241740872219165754), 'UD47x28 log2(1000000)');
 
-    x = UD47x28Trait::new(MAX_WHOLE);
-    assert(x.log2() == UD47x28Trait::new(1579860133431538543021765642266), 'UD47x28 log2(MAX_WHOLE)');
+    x = UD47x28Trait::new(MAX_WHOLE_UD47x28);
+    assert(x.log2() == UD47x28Trait::new(1579860133431538543021765642266), 'UD47x28 log2(MAX_WHOLE_UD47x28)');
 
-    x = UD47x28Trait::new(MAX);
-    assert(x.log2() == UD47x28Trait::new(1579860133431538543021765642266), 'UD47x28 log2(MAX)');
+    x = UD47x28Trait::new(MAX_UD47x28);
+    assert(x.log2() == UD47x28Trait::new(1579860133431538543021765642266), 'UD47x28 log2(MAX_UD47x28)');
 }
 
 ////////////////////////////////
@@ -434,15 +434,15 @@ fn test_round_sets() {
     x = UD47x28Trait::new(381233000000000000000000000000);
     assert(x.round() == UD47x28Trait::new(38 * ONE), 'UD47x28 round(38.1233)');
 
-    let x = UD47x28Trait::new(MAX_WHOLE - 1);
-    assert(x.round() == UD47x28Trait::new(MAX_WHOLE), 'UD47x28 round(MAX_WHOLE)');
+    let x = UD47x28Trait::new(MAX_WHOLE_UD47x28 - 1);
+    assert(x.round() == UD47x28Trait::new(MAX_WHOLE_UD47x28), 'UD47x28 round(MAX_WHOLE)');
 }
 
 #[test]
 #[available_gas(2000000000)]
 #[should_panic(expected: ('UD47x28 round overflow', ))]
 fn test_round_expect_overflow() {
-    let x = UD47x28Trait::new(MAX_WHOLE);
+    let x = UD47x28Trait::new(MAX_WHOLE_UD47x28);
     x.round();
 }
 
@@ -468,15 +468,15 @@ fn test_ceil_sets() {
     x = UD47x28Trait::new(381233000000000000000000000000);
     assert(x.ceil() == UD47x28Trait::new(39 * ONE), 'UD47x28 ceil(38.1233)');
 
-    let x = UD47x28Trait::new(MAX_WHOLE - 1);
-    assert(x.ceil() == UD47x28Trait::new(MAX_WHOLE), 'UD47x28 ceil(MAX_WHOLE)');
+    let x = UD47x28Trait::new(MAX_WHOLE_UD47x28 - 1);
+    assert(x.ceil() == UD47x28Trait::new(MAX_WHOLE_UD47x28), 'UD47x28 ceil(MAX_WHOLE)');
 }
 
 #[test]
 #[available_gas(2000000000)]
 #[should_panic(expected: ('UD47x28 ceil overflow', ))]
 fn test_ceil_expect_overflow() {
-    let x = UD47x28Trait::new(MAX_WHOLE + 1);
+    let x = UD47x28Trait::new(MAX_WHOLE_UD47x28 + 1);
     x.ceil();
 }
 
@@ -502,6 +502,6 @@ fn test_floor_sets() {
     x = UD47x28Trait::new(381233000000000000000000000000);
     assert(x.floor() == UD47x28Trait::new(38 * ONE), 'UD47x28 floor(38.1233)');
 
-    let x = UD47x28Trait::new(MAX_WHOLE - 1);
-    assert(x.floor() == UD47x28Trait::new(MAX_WHOLE - ONE), 'UD47x28 floor(MAX_WHOLE)');
+    let x = UD47x28Trait::new(MAX_WHOLE_UD47x28 - 1);
+    assert(x.floor() == UD47x28Trait::new(MAX_WHOLE_UD47x28 - ONE), 'UD47x28 floor(MAX_WHOLE)');
 }
