@@ -9,14 +9,9 @@ use integer::{U256Mul, U256Div, U256Rem};
 
 use types252::math::{bit_math, math, fixed_point_math};
 use types252::math::fixed_point_math::{Q128, Q100, Q64, Q32, Q16};
+use types252::constants::ONE;
 
 use debug::PrintTrait;
-
-////////////////////////////////
-// CONSTANTS
-////////////////////////////////
-
-const ONE: u256 = 10000000000000000000000000000;
 
 ////////////////////////////////
 // TYPE
